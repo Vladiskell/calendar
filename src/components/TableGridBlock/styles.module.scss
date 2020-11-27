@@ -4,6 +4,7 @@
     @extend .selectedAreaDone;
     background-color: rgba(206, 197, 247, 0.7) !important;
 
+    // вопрос: на edit странице уже занятые области должны быть доступны для ивентов или нет?
     &.disabled {
         pointer-events: none;
     }

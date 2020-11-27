@@ -56,6 +56,7 @@ const Header = () => {
                         </Button>
                     ) : (
                         <Button
+                            className={styles.header__editButton}
                             startIcon={<EditIcon />}
                             onClick={onEdit}>
                             Edit Schedule
