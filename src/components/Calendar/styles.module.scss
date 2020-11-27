@@ -10,20 +10,19 @@
 }
 
 .calendar__dates {
-    grid-column: 1 / -1;
+    grid-column: 2 / -1;
     grid-row: 1 / 2;
 }
 
 .calendar__times {
     grid-column: 1 / 2;
     grid-row: 2 / -1;
-    border-right: 1px solid rgba(0, 0, 0, 0.3);
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
 }
 
 .calendar__table {
     grid-column: 2 / -1;
     grid-row: 2 / -1;
-    border-top: 1px solid rgba(0, 0, 0, 0.2);
 
 }
 

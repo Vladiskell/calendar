@@ -40,7 +40,6 @@ const CalendarDates = () => {
 
     return (
         <div className={styles.calendarDates}>
-            <div></div>
             { days.map((item) => (
                 <div className={styles.calendarDates__item} key={item.day}>
                     <span>{item.title}, {item.day}</span>

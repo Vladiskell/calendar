@@ -1,6 +1,6 @@
 .calendarDates {
     display: grid;
-    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     height: 100%;
 }
 
@@ -14,25 +14,34 @@
         display: block;
         content: '';
         position: absolute;
-        height: 24px;
+        height: 16px;
         bottom: 0px;
-        left: -1px;
+        right: 0px;
         width: 1px;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    &:first-child {
+        &:before {
+            display: block;
+            content: '';
+            position: absolute;
+            height: 16px;
+            bottom: 0px;
+            left: -1px;
+            width: 1px;
+            background-color: rgba(0, 0, 0, 0.15);
+        }
+    }
+
+    span {
+        font-size: 16px;
+        color: #737272;
     }
 
     .active {
         span {
             color: #000;
         }
-    }
-
-    &:last-child {
-        border-right: none;
-    }
-
-    span {
-        font-size: 16px;
-        color: #737272;
     }
 }
