@@ -27,8 +27,6 @@ function getMouseEventCoordinate (event) {
         y: gridCoordinateY,
     } = event.target.getBoundingClientRect();
 
-    console.log('-----', event.target);
-
     // get the left and right mouse event coordinates
     const mouseEventCoordinateX = event.clientX;
     const mouseEventCoordinateY = event.clientY;

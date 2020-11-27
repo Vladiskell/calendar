@@ -48,17 +48,24 @@ const TableGrid = () => {
     }
 
     return (
-        <div className={styles.tableGrid__container}>
-            <div className={styles.tableGrid__bg} style={{ backgroundImage: `url('${gridBg}')`}}></div>
 
-            <div
-                className={styles.tableGrid}
-                onMouseDown={(e) => onMouseDown(e)}
-                onMouseUp={(e) => onMouseUp(e)}
-                onMouseMove={(e) => mouseMove && onMouseMove(e)}
-            >
-                <SelectedScope gridItemValues={gridItemValues} done={!mouseMove}></SelectedScope>
-            </div>
+        <div
+            className={styles.tableGrid}
+            onMouseDown={(e) => onMouseDown(e)}
+            onMouseUp={(e) => onMouseUp(e)}
+            onMouseMove={(e) => mouseMove && onMouseMove(e)}
+        >
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+            <div className={styles.tableGrid__column}></div>
+
+            <div className={styles.workBlock}></div>
+
+            <SelectedScope gridItemValues={gridItemValues} done={!mouseMove}></SelectedScope>
         </div>
     )
 }
