@@ -1,11 +1,10 @@
 .header {
-    position: sticky;
-    top: 0;
-    left: 0;
+    //position: sticky;
+    //top: 0;
+    //left: 0;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
     z-index: 9999;
-    pointer-events: none;
 }
 
 .header__wrapper {
@@ -51,9 +50,10 @@
     justify-content: flex-end;
 
     button {
-        background-color: #f3f8f9;
+        //background-color: #f3f8f9;
+        min-width: 200px;
         border: 1px solid rgba(0, 0, 0, 0.1);
-        padding: 8px 24px !important;
+        padding: 6px 24px !important;
         border-radius: 8px !important;
     }
 }

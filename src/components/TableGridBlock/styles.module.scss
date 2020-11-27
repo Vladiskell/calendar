@@ -1,0 +1,10 @@
+@import '../SelectedArea/styles.module';
+
+.tableGrid__block {
+    @extend .selectedAreaDone;
+    background-color: rgba(206, 197, 247, 0.7) !important;
+
+    &.disabled {
+        pointer-events: none;
+    }
+}

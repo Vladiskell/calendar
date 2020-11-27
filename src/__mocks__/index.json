@@ -1,0 +1,32 @@
+{
+    "days": [
+        {
+            "title": "Sun",
+            "day": 8
+        },
+        {
+            "title": "Mon",
+            "day": 9
+        },
+        {
+            "title": "Tue",
+            "day": 10
+        },
+        {
+            "title": "Wed",
+            "day": 11
+        },
+        {
+            "title": "Thu",
+            "day": 12
+        },
+        {
+            "title": "Fri",
+            "day": 13
+        },
+        {
+            "title": "Sat",
+            "day": 14
+        }
+    ]
+}

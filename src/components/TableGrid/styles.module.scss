@@ -1,26 +1,5 @@
-@import '../SelectedScope/styles.module';
-
 .tableGrid {
     display: grid;
     grid-template-columns: repeat(7, calc(100% / 7));
     grid-template-rows: repeat(96, 40px);
-}
-
-.tableGrid__column {
-    border-right: 1px solid rgba(0, 0, 0, 0.15);
-    grid-row: 1 / -1;
-
-    @for $i from 1 through 7 {
-        &:nth-child(#{$i}) {
-            grid-column: #{$i} / #{$i + 1};
-        }
-    }
-}
-
-.workBlock {
-    @extend .selectedScopeDone;
-
-    grid-row: 2 / 20;
-    grid-column: 2 / 3;
-
 }

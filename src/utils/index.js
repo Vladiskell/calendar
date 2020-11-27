@@ -1,3 +1,4 @@
+// constants
 const rowHeight = 40;
 
 // get top grid coordinate and mouse Y coordinate relative grid;
@@ -14,7 +15,7 @@ export function getCoordinates (event) {
 
 // get first column value as column data index
 export function getFirstColumnValue (event) {
-    const columnStart = event.target.dataset.index;
+    const columnStart = event.target.dataset.index || 1;
 
     return columnStart;
 }

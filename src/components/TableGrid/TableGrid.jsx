@@ -1,19 +1,27 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 
-import SelectedScope from "../SelectedScope/SelectedScope";
-import {
-    getFirstColumnValue,
-    getFirstRowValue,
-    getLastRowValue,
-} from '../../utils';
-import TableGridColumns from '../TableGridColumns/TableGridColumns';
+import __mocks__ from '../../__mocks__/index.json';
+
+import { clearCurrentCalendarDataItem, setCurrentCalendarDataItem } from '../../redux/actions';
+import { getCalendarDataSelector, getIsEditPageSelector } from '../../redux/selectors';
+import { getFirstColumnValue, getFirstRowValue, getLastRowValue } from '../../utils';
+
+import SelectedArea from "../SelectedArea/SelectedArea";
+import TableGridColumn from '../TableGridColumn/TableGridColumn';
+import TableGridBlock from '../TableGridBlock/TableGridBlock';
 
 // ---------------------------------------------------------------------------------------------------------------------
 const TableGrid = () => {
+    const dispatch = useDispatch();
+    const isEditPage = useSelector(getIsEditPageSelector);
+    const tableGridBlocks = useSelector(getCalendarDataSelector);
+
     const [firstRow, setFirstRow] = useState('');
     const [rows, setRows] = useState('');
     const [columns, setColumns] = useState('');
+
     const [mouseMove, setMouseMove] = useState(false);
 
     const createSelectedScope = (e) => {
@@ -37,16 +45,43 @@ const TableGrid = () => {
         setRows(rows);
     }
 
+    const completeCreatedSelectedScope = () => {
+        dispatch(setCurrentCalendarDataItem({ rows, columns }));
+
+        setRows('0 / 0');
+        setColumns('0 / 0');
+
+        dispatch(clearCurrentCalendarDataItem());
+
+        setMouseMove(false);
+    }
+
     return (
         <div
             className={styles.tableGrid}
-            onMouseDown={(e) => createSelectedScope(e)}
+            onMouseDown={(e) => isEditPage && createSelectedScope(e)}
             onMouseMove={(e) => mouseMove && changeSelectedScope(e)}
-            onMouseUp={(e) => setMouseMove(false)}
+            onMouseUp={() => isEditPage && completeCreatedSelectedScope()}
         >
-            <TableGridColumns />
 
-            <SelectedScope rows={rows} columns={columns} done={!mouseMove}></SelectedScope>
+            { __mocks__.days.map((item, index) => (
+                <TableGridColumn column={+index + 1} key={item.title} />
+            )) }
+
+
+            { tableGridBlocks.map((item) => (
+                <TableGridBlock
+                    isEditPage={isEditPage}
+                    key={item.id}
+                    rows={item.gridPosition.rows}
+                    columns={item.gridPosition.columns}
+                />
+            )) }
+
+            { isEditPage && (
+                <SelectedArea rows={rows} columns={columns} done={!mouseMove} />
+            ) }
+
         </div>
     );
 }

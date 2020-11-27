@@ -1,15 +1,15 @@
 import React from 'react';
+import styles from './styles.module.scss';
 import classnames from 'classnames';
-import styles from './styles.module.scss'
 
 // ---------------------------------------------------------------------------------------------------------------------
-const SelectedScope = ({ rows, columns, done }) => {
+const TableGridBlock = ({ isEditPage, rows, columns }) => {
     return (
         <div
-            className={classnames(styles.selectedScope, done && styles.selectedScopeDone)}
+            className={classnames(styles.tableGrid__block, isEditPage && styles.disabled)}
             style={{ gridRow: rows, gridColumn: columns }}
         />
-    )
-}
+    );
+};
 
-export default SelectedScope;
+export default TableGridBlock;

@@ -1,46 +1,13 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import styles from './styles.module.scss';
+
+import __mocks__ from '../../__mocks__/index.json';
 
 // ---------------------------------------------------------------------------------------------------------------------
 const CalendarDates = () => {
-
-    const days = useMemo(() => (
-        [
-            {
-                'title': 'Sun',
-                'day': 8
-            },
-            {
-                'title': 'Mon',
-                'day': 9
-            },
-            {
-                'title': 'Tue',
-                'day': 10
-            },
-            {
-                'title': 'Wed',
-                'day': 11
-            },
-            {
-                'title': 'Thu',
-                'day': 12
-            },
-            {
-                'title': 'Fri',
-                'day': 13
-            },
-            {
-                'title': 'Sat',
-                'day': 14
-            },
-
-        ]
-    ), [])
-
     return (
         <div className={styles.calendarDates}>
-            { days.map((item) => (
+            { __mocks__.days.map((item) => (
                 <div className={styles.calendarDates__item} key={item.day}>
                     <span>{item.title}, {item.day}</span>
                 </div>
