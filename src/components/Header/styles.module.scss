@@ -1,28 +1,19 @@
 .header {
-    //position: sticky;
-    //top: 0;
-    //left: 0;
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    z-index: 9999;
 }
 
 .header__wrapper {
     display: flex;
     justify-content: space-between;
     align-items: center;
+
     padding: 8px 32px;
-
-    > div:not(:nth-child(2)) {
-        flex-basis: 200px;
-    }
-
-    > div:nth-child(2) {
-        flex-grow: 1;
-    }
 }
 
 .header__logo {
+    flex-basis: 200px;
+
     span {
         font-weight: 600;
     }
@@ -33,14 +24,17 @@
     align-items: center;
     justify-content: center;
 
+    flex-grow: 1;
+
     button {
         background-color: #f3f8f9;
         border: 1px solid rgba(0, 0, 0, 0.15);
 
         &:nth-child(2) {
             padding: 8px 24px !important;
-            border-radius: 8px !important;
             margin: 0 16px;
+
+            border-radius: 8px !important;
         }
     }
 }
@@ -49,10 +43,13 @@
     display: flex;
     justify-content: flex-end;
 
+    flex-basis: 200px;
+
     button {
         min-width: 200px;
-        border: 1px solid rgba(0, 0, 0, 0.1);
         padding: 6px 24px !important;
+
+        border: 1px solid rgba(0, 0, 0, 0.1);
         border-radius: 8px !important;
     }
 

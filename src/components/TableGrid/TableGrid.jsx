@@ -66,10 +66,7 @@ const TableGrid = () => {
         >
 
             { __mocks__.days.map((item, index) => (
-                <TableGridColumn
-                    column={+index + 1}
-                    key={item.title}
-                />
+                <TableGridColumn column={+index + 1} key={item.title} />
             )) }
 
             { tableGridBlocks.map((item) => (
@@ -82,7 +79,7 @@ const TableGrid = () => {
             )) }
 
             { isEditPage && (
-                <SelectedArea rows={rows} columns={columns} done={!isChangeSelectArea} />
+                <SelectedArea rows={rows} columns={columns} />
             ) }
 
         </div>

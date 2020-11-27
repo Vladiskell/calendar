@@ -1,14 +1,11 @@
-import React, { useEffect, useRef } from 'react';
-import classnames from 'classnames';
+import React from 'react';
 import styles from './styles.module.scss'
-import { useDispatch } from 'react-redux';
-import { setCurrentCalendarDataItem } from '../../redux/actions';
 
 // ---------------------------------------------------------------------------------------------------------------------
-const SelectedArea = ({ rows, columns, done }) => {
+const SelectedArea = ({ rows, columns }) => {
     return (
         <div
-            className={classnames(styles.selectedArea, done && styles.selectedAreaDone)}
+            className={styles.selectedArea}
             style={{ gridRow: rows, gridColumn: columns }}
         />
     )

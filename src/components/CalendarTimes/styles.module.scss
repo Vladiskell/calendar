@@ -7,15 +7,16 @@
 .calendarTimes__item {
     display: flex;
     justify-content: center;
+
     position: relative;
     padding: 16px 0;
-
-    &.active span {
-        color: #000;
-    }
 
     span {
         font-size: 12px;
         color: #737272;
+    }
+
+    &.active span {
+        color: #000;
     }
 }
