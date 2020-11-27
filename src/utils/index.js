@@ -13,7 +13,7 @@ function getGridItemStartValue (coordinate, value) {
 function getGridItemSizes(event) {
     const gridWidth = event.target.getBoundingClientRect().width;
 
-    const rowHeight = 70;
+    const rowHeight = 40;
     const columnWidth = gridWidth / 7;
 
     return { rowHeight, columnWidth }
@@ -26,6 +26,8 @@ function getMouseEventCoordinate (event) {
         x: gridCoordinateX,
         y: gridCoordinateY,
     } = event.currentTarget.getBoundingClientRect();
+
+    console.log('-----', event.currentTarget.getBoundingClientRect());
 
     // get the left and right mouse event coordinates
     const mouseEventCoordinateX = event.clientX;
@@ -62,11 +64,12 @@ export function getLastGridValues (event) {
 
 // get next row line based on row height
 export function getNextRowLine (event, rowStart) {
-    const mouseMoveDistance = (event.clientY - 200) - (rowStart * 70);
+    const mouseMoveDistance = (event.clientY - 176) - (rowStart * 40);
 
-    if ( mouseMoveDistance < 10) {
+
+    if ( mouseMoveDistance < 5) {
         return 1
     } else {
-        return Math.ceil(mouseMoveDistance / 70) + 1
+        return Math.ceil(mouseMoveDistance / 40) + 1
     }
 }

@@ -1,0 +1,32 @@
+.tableGrid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(70px, 1fr));
+    grid-template-rows: repeat(96, 40px);
+    position: relative;
+}
+
+.tableGrid__container {
+    position: relative;
+}
+
+.tableGrid__bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: calc(100% / 7) 40px;
+    background-repeat: repeat;
+}
+
+.work {
+    grid-column: 2 / 3;
+    grid-row: 5 / 10;
+    background-color: rgba(255, 0, 0, 0.3);
+}
+
+.block {
+    grid-column: 2 / 3;
+    grid-row: 7 / 10;
+    background-color: rgba(0, 255, 0, 0.3);
+}

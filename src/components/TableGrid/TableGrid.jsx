@@ -1,11 +1,12 @@
-import React, { useRef, useState } from 'react';
-import { Container } from "@material-ui/core";
+import React, { useState } from 'react';
 import styles from './styles.module.scss';
 import gridBg from '../../assets/grid-item.png';
-import { getFirstGridValues, getLastGridValues, getNextRowLine } from "../../utils";
-import SelectedScope from "../SelectedScope/SelectedScope";
 
-const Grid = () => {
+import SelectedScope from "../SelectedScope/SelectedScope";
+import { getFirstGridValues, getLastGridValues, getNextRowLine } from "../../utils";
+
+// ---------------------------------------------------------------------------------------------------------------------
+const TableGrid = () => {
     const [gridItemValues, setGridItemValues] = useState({});
     const [mouseMove, setMouseMove] = useState(false);
 
@@ -47,19 +48,19 @@ const Grid = () => {
     }
 
     return (
-        <Container className={styles.container} maxWidth="xl">
-            <div className={styles.grid__bg} style={{ backgroundImage: `url('${gridBg}')`}}></div>
+        <div className={styles.tableGrid__container}>
+            <div className={styles.tableGrid__bg} style={{ backgroundImage: `url('${gridBg}')`}}></div>
 
             <div
-                className={styles.grid}
+                className={styles.tableGrid}
                 onMouseDown={(e) => onMouseDown(e)}
                 onMouseUp={(e) => onMouseUp(e)}
                 onMouseMove={(e) => mouseMove && onMouseMove(e)}
             >
                 <SelectedScope gridItemValues={gridItemValues} done={!mouseMove}></SelectedScope>
             </div>
-        </Container>
+        </div>
     )
 }
 
-export default Grid;
+export default TableGrid;

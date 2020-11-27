@@ -1,0 +1,38 @@
+.calendarDates {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    height: 100%;
+}
+
+.calendarDates__item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+
+    &:after {
+        display: block;
+        content: '';
+        position: absolute;
+        height: 24px;
+        bottom: 0px;
+        left: -1px;
+        width: 1px;
+        background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .active {
+        span {
+            color: #000;
+        }
+    }
+
+    &:last-child {
+        border-right: none;
+    }
+
+    span {
+        font-size: 16px;
+        color: #737272;
+    }
+}
