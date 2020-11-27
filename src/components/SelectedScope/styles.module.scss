@@ -7,15 +7,18 @@
 
     background-size: 100% 40px;
     background-repeat: repeat-y;
-
     background-image: url('/assets/grid-item.png');
+
+    pointer-events: none;
 }
 
 .selectedScopeDone {
     @extend .selectedScope;
 
-    width: calc(100% - 1px);
-    background-color: rgba(237, 251, 201, 0.7) !important;
     border: 1px solid transparent !important;
+    background-color: rgba(237, 251, 201, 0.7) !important;
+
+    width: calc(100% - 1px);
+    transition: .15s ease-in-out;
 }
 

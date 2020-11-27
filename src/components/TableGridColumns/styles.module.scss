@@ -1,0 +1,10 @@
+.tableGrid__column {
+    grid-row: 1 / -1;
+    border-right: 1px solid rgba(0, 0, 0, 0.15);
+
+    @for $i from 1 through 7 {
+        &:nth-child(#{$i}) {
+            grid-column: #{$i} / #{$i + 1};
+        }
+    }
+}

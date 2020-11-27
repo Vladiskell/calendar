@@ -1,73 +1,54 @@
 import React, { useState } from 'react';
 import styles from './styles.module.scss';
-import gridBg from '../../assets/grid-item.png';
 
 import SelectedScope from "../SelectedScope/SelectedScope";
-import { getFirstGridValues, getLastGridValues, getNextRowLine } from "../../utils";
+import {
+    getFirstColumnValue,
+    getFirstRowValue,
+    getLastRowValue,
+} from '../../utils';
+import TableGridColumns from '../TableGridColumns/TableGridColumns';
 
 // ---------------------------------------------------------------------------------------------------------------------
 const TableGrid = () => {
-    const [gridItemValues, setGridItemValues] = useState({});
+    const [firstRow, setFirstRow] = useState('');
+    const [rows, setRows] = useState('');
+    const [columns, setColumns] = useState('');
     const [mouseMove, setMouseMove] = useState(false);
 
-    const onMouseDown = (e) => {
-        const { firstRowValue, firstColumnValue } = getFirstGridValues(e);
+    const createSelectedScope = (e) => {
+        const rowStart = getFirstRowValue(e);
+        const columnStart = getFirstColumnValue(e);
 
-        setGridItemValues({
-            rowStart: firstRowValue,
-            rowEnd: firstRowValue + 1,
-            columnStart: firstColumnValue,
-            columnEnd: firstColumnValue + 1,
-        })
+        const rows = `${rowStart} / ${+rowStart + 1}`;
+        const columns = `${columnStart} / ${+columnStart + 1}`;
 
         setMouseMove(true);
+        setFirstRow(rowStart);
+
+        setRows(rows);
+        setColumns(columns);
     }
 
-    const onMouseMove = (e) => {
-        const nextLine = getNextRowLine(e, gridItemValues.rowStart) + gridItemValues.rowStart;
+    const changeSelectedScope = (e) => {
+        const lastRow = getLastRowValue(e);
+        const rows = `${firstRow} / ${lastRow}`;;
 
-        setGridItemValues({
-            rowStart: gridItemValues.rowStart,
-            rowEnd: nextLine,
-            columnStart: gridItemValues.columnStart,
-            columnEnd: gridItemValues.columnEnd,
-        })
-    }
-
-    const onMouseUp = (e) => {
-        const { lastRowValue } = getLastGridValues(e);
-
-        setGridItemValues({
-            rowStart: gridItemValues.rowStart,
-            rowEnd: lastRowValue,
-            columnStart: gridItemValues.columnStart,
-            columnEnd: gridItemValues.columnStart,
-        })
-
-        setMouseMove(false);
+        setRows(rows);
     }
 
     return (
-
         <div
             className={styles.tableGrid}
-            onMouseDown={(e) => onMouseDown(e)}
-            onMouseUp={(e) => onMouseUp(e)}
-            onMouseMove={(e) => mouseMove && onMouseMove(e)}
+            onMouseDown={(e) => createSelectedScope(e)}
+            onMouseMove={(e) => mouseMove && changeSelectedScope(e)}
+            onMouseUp={(e) => setMouseMove(false)}
         >
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
-            <div className={styles.tableGrid__column}></div>
+            <TableGridColumns />
 
-            <div className={styles.workBlock}></div>
-
-            <SelectedScope gridItemValues={gridItemValues} done={!mouseMove}></SelectedScope>
+            <SelectedScope rows={rows} columns={columns} done={!mouseMove}></SelectedScope>
         </div>
-    )
+    );
 }
 
 export default TableGrid;

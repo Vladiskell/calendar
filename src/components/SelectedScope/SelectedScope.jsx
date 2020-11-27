@@ -3,14 +3,11 @@ import classnames from 'classnames';
 import styles from './styles.module.scss'
 
 // ---------------------------------------------------------------------------------------------------------------------
-const SelectedScope = ({ gridItemValues, done }) => {
+const SelectedScope = ({ rows, columns, done }) => {
     return (
         <div
             className={classnames(styles.selectedScope, done && styles.selectedScopeDone)}
-            style={{
-                gridRow: `${gridItemValues.rowStart} / ${gridItemValues.rowEnd}`,
-                gridColumn: `${gridItemValues.columnStart} / ${gridItemValues.columnEnd}`
-            }}
+            style={{ gridRow: rows, gridColumn: columns }}
         />
     )
 }
