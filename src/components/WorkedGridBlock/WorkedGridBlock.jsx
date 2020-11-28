@@ -3,13 +3,13 @@ import styles from './styles.module.scss';
 import classnames from 'classnames';
 
 // ---------------------------------------------------------------------------------------------------------------------
-const TableGridBlock = ({ isEditPage, rows, columns }) => {
+const WorkedGridBlock = ({ isEditPage, rows, columns }) => {
     return (
         <div
-            className={classnames(styles.tableGrid__block, isEditPage && styles.disabled)}
+            className={classnames(styles.workedGridBlock, isEditPage && styles.disabled)}
             style={{ gridRow: rows, gridColumn: columns }}
         />
     );
 };
 
-export default TableGridBlock;
+export default WorkedGridBlock;

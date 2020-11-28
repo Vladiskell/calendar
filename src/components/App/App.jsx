@@ -1,21 +1,16 @@
 import React from 'react';
 import styles from './styles.module.scss'
 
-import Header from '../Header/Header';
-import SideMenu from '../SideMenu/SideMenu';
-import TableGrid from '../TableGrid/TableGrid';
 import Calendar from '../Calendar/Calendar';
 
 // ---------------------------------------------------------------------------------------------------------------------
 const App = () => {
     return (
         <div className={styles.page}>
-            <SideMenu />
-            <div className={styles.content}>
-                <Header />
+            <aside className={styles.sideMenu}></aside>
+            <main className={styles.content}>
                 <Calendar />
-                {/*<TableGrid />*/}
-            </div>
+            </main>
         </div>
     )
 }

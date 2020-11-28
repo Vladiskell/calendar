@@ -1,49 +1,30 @@
+@import '../../assets/general.module';
+
 .calendarDates {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    @include gridTemplateColumns;
+
     height: 100%;
 }
 
 .calendarDates__item {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include d-flex;
 
     position: relative;
+    border-bottom: $borderDark;
 
-    &:after, &:before {
-        position: absolute;
-        display: block;
-        content: '';
-        bottom: 0px;
-        height: 16px;
+    &:before {
+        @include pseudo-absolute;
+        top: 50px;
+        left: -1px;
+
+        background-color: $backgroundDark;
+        height: 30px;
         width: 1px;
     }
 
-    &:after {
-        bottom: 0px;
-        right: 0px;
-
-        background-color: rgba(0, 0, 0, 0.15);
-    }
-
-    &:first-child {
-        &:before {
-            left: -1px;
-            width: 1px;
-
-            background-color: rgba(0, 0, 0, 0.15);
-        }
-    }
-
     span {
+        color: $textGray;
         font-size: 16px;
-        color: #737272;
-    }
-
-    &.active {
-        span {
-            color: #000;
-        }
     }
 }

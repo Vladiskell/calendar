@@ -1,0 +1,11 @@
+@import '../../assets/general.module';
+
+.selectedGridArea {
+    @include gridArea($blueDark);
+    opacity: 1;
+
+    &.disabled {
+        opacity: 0;
+    }
+}
+

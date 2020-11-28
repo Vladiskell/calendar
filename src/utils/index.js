@@ -15,7 +15,7 @@ export function getCoordinates (event) {
 
 // get first column value as column data index
 export function getFirstColumnValue (event) {
-    const columnStart = event.target.dataset.index || 1;
+    const columnStart = event.target.dataset.index;
 
     return columnStart;
 }
@@ -32,6 +32,7 @@ export function getFirstRowValue (event) {
 export function getLastRowValue (event) {
     const gridCoordinateY = getCoordinates(event).gridCoordinateY;
     const mouseCoordinateY = event.clientY;
+
     const mouseMoveDistance = (mouseCoordinateY - gridCoordinateY) / rowHeight;
 
     const lastRowValue = Math.ceil(mouseMoveDistance + 1);

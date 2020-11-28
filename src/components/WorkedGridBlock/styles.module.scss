@@ -1,0 +1,13 @@
+@import '../../assets/general.module';
+
+.workedGridBlock {
+    @include gridArea($purpleLight);
+
+    &:nth-child(2n) {
+        @include gridArea($greenLight);
+    }
+
+    &.disabled {
+        pointer-events: none;
+    }
+}

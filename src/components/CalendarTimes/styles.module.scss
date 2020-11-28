@@ -1,22 +1,16 @@
+@import "../../assets/general.module";
+
 .calendarTimes {
     display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: repeat(48, 80px);
+    @include gridTemplateRows;
 }
 
 .calendarTimes__item {
-    display: flex;
-    justify-content: center;
-
-    position: relative;
-    padding: 16px 0;
+    @include d-flex(flex-end, center);
+    padding-right: 16px;
 
     span {
         font-size: 12px;
-        color: #737272;
-    }
-
-    &.active span {
-        color: #000;
+        color: $textGray;
     }
 }

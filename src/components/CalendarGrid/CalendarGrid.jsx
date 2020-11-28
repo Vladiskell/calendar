@@ -1,23 +1,22 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.scss';
-import classnames from 'classnames';
 
-import { clearCurrentCalendarDataItem, setCurrentCalendarDataItem } from '../../redux/actions';
-import { getCalendarDataSelector, getIsEditPageSelector } from '../../redux/selectors';
+import { getCurrentGridItem, getGridData, getIsEditPage } from '../../redux/selectors';
+
+import WorkedGridBlock from '../WorkedGridBlock/WorkedGridBlock';
+import SelectedGridSArea from '../SelectedGridArea/SelectedGridSArea';
 import { getFirstColumnValue, getFirstRowValue, getLastRowValue } from '../../utils';
-
-import SelectedArea from "../SelectedArea/SelectedArea";
-import TableGridColumn from '../TableGridColumn/TableGridColumn';
-import TableGridBlock from '../TableGridBlock/TableGridBlock';
-
-import __mocks__ from '../../__mocks__/index.json';
+import { clearCurrentGridItem, setCurrentGridItem } from '../../redux/actions';
+import classnames from 'classnames';
+import __mocks__ from '../../__mocks__';
 
 // ---------------------------------------------------------------------------------------------------------------------
-const TableGrid = () => {
+const CalendarGrid = () => {
     const dispatch = useDispatch();
-    const isEditPage = useSelector(getIsEditPageSelector);
-    const tableGridBlocks = useSelector(getCalendarDataSelector);
+
+    const isEditPage = useSelector(getIsEditPage);
+    const gridBlocks = useSelector(getGridData);
 
     const [firstRow, setFirstRow] = useState('');
     const [rows, setRows] = useState('');
@@ -41,49 +40,45 @@ const TableGrid = () => {
 
     const changeSelectedArea = (e) => {
         const lastRow = getLastRowValue(e);
-        const rows = `${firstRow} / ${lastRow}`;;
+        const rows = `${firstRow} / ${lastRow}`;
 
         setRows(rows);
     }
 
     const completeCreatedSelectedScope = () => {
-        dispatch(setCurrentCalendarDataItem({ rows, columns }));
-
-        setRows('0 / 0');
-        setColumns('0 / 0');
-
-        dispatch(clearCurrentCalendarDataItem());
+        dispatch(setCurrentGridItem(rows, columns));
 
         setIsChangeSelectArea(false);
     }
 
     return (
         <div
-            className={classnames(styles.tableGrid, isChangeSelectArea && styles.select)}
+            className={classnames(styles.calendarGrid, isChangeSelectArea && styles.select)}
             onMouseDown={(e) => isEditPage && createSelectedArea(e)}
             onMouseMove={(e) => isChangeSelectArea && changeSelectedArea(e)}
             onMouseUp={() => isEditPage && completeCreatedSelectedScope()}
         >
 
             { __mocks__.days.map((item, index) => (
-                <TableGridColumn column={+index + 1} key={item.title} />
+                <div className={styles.calendarGrid__column} data-index={index + 1} key={item.title} />
             )) }
 
-            { tableGridBlocks.map((item) => (
-                <TableGridBlock
+            { gridBlocks.map((item) => (
+                <WorkedGridBlock
                     isEditPage={isEditPage}
-                    rows={item.gridPosition.rows}
-                    columns={item.gridPosition.columns}
-                    key={item.id}
+                    rows={item.gridValues.rows}
+                    columns={item.gridValues.columns}
                 />
-            )) }
+            ))}
 
             { isEditPage && (
-                <SelectedArea rows={rows} columns={columns} />
+                <SelectedGridSArea
+                    rows={rows}
+                    columns={columns}
+                />
             ) }
-
         </div>
     );
-}
+};
 
-export default TableGrid;
+export default CalendarGrid;

@@ -4,7 +4,7 @@ import styles from './styles.module.scss';
 // ---------------------------------------------------------------------------------------------------------------------
 const CalendarTimes = () => {
     const elements = [];
-    for (let i = 0; i < 48; i++) {
+    for (let i = 0; i < 96; i++) {
         elements.push(i)
     }
 

@@ -1,5 +1,5 @@
-export const getCalendarDataSelector = (state) => state.calendar.data;
+export const getGridData = (state) => state.calendar.data;
 
-export const getCalendarDataItemSelector = (state, id) => state.calendar.currentItem;
+export const getCurrentGridItem = (state) => state.calendar.currentGridItem;
 
-export const getIsEditPageSelector = (state) => state.calendar.isEditPage;
+export const getIsEditPage = (state) => state.calendar.isEditPage;

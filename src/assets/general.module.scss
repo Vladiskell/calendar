@@ -1,0 +1,96 @@
+// ---------------------------------------------------------------------------------------------------------------------
+// constants
+$blue: #0096c9;
+$blueLight: #ecfaff;
+$blueDark: #5d9bf740;
+
+$greenLight: #d9f9d1;
+$purpleLight: #eae7f9;
+$light: #f3f8f9;
+
+$textGray: #62777e;
+
+$backgroundDark: #dbe7ea;
+$borderDark: 1px solid $backgroundDark;
+
+// ---------------------------------------------------------------------------------------------------------------------
+// grid templates
+$gridColumns: 7;
+$gridRows: 96;
+$gridRowHeight: 40px;
+
+@mixin gridTemplateColumns {
+    grid-template-columns: repeat($gridColumns, 1fr);
+}
+
+@mixin gridTemplateRows {
+    grid-template-rows: repeat($gridRows, $gridRowHeight);
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// mixins
+@mixin d-flex ($justify: center, $align: center) {
+    display: flex;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+@mixin pseudo-absolute {
+    display: block;
+    content: '';
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+@mixin btn ($px: 8px, $py: 16px, $svg: 16px) {
+    padding: $px $py !important;
+
+    font-size: 14px !important;
+    font-weight: normal !important;
+    text-transform: none !important;
+
+    box-shadow: none !important;
+    border-radius: 12px !important;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: $light !important;
+
+    & svg {
+        font-size: $svg !important;
+        color: $blue !important;
+    }
+}
+
+@mixin btnPrimary {
+    @include btn;
+}
+
+@mixin btnPrimaryIcon {
+    @include btn(7px, 10px, 22px);
+}
+
+@mixin gridArea ($background: $blueDark) {
+    position: relative;
+
+    &:before {
+        @include pseudo-absolute;
+
+        background-image: linear-gradient(to bottom, transparent $gridRowHeight - 1px, #fff 1px);
+        background-size: 100% $gridRowHeight;
+        background-repeat: repeat-y;
+
+        z-index: -1;
+    }
+
+    &:after {
+        @include pseudo-absolute;
+
+        background-color: $background;
+        z-index: -2;
+    }
+}
+
+

@@ -1,0 +1,26 @@
+@import '../../assets/general.module';
+
+.calendarGrid {
+    display: grid;
+    @include gridTemplateRows;
+    @include gridTemplateColumns;
+
+    &.select {
+        cursor: row-resize;
+    }
+}
+
+.calendarGrid__column {
+    grid-row: 1 / -1;
+
+    @for $i from 1 through $gridColumns {
+        &:nth-child(#{$i}) {
+            grid-column: #{$i} / #{$i + 1};
+            border-right: $borderDark;
+        }
+    }
+
+    &:nth-child(#{$gridColumns}) {
+        border-right: none;
+    }
+}

@@ -1,0 +1,59 @@
+@import '../../assets/general.module';
+
+.calendarHeader {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-column-gap: 16px;
+
+    padding: 16px 32px;
+    background-color: #fff;
+    border-bottom: $borderDark;
+}
+
+.calendarHeader__title {
+    @include d-flex(flex-start);
+
+    span {
+        font-weight: 600;
+    }
+}
+
+.calendarHeader__dates {
+    @include d-flex(center, stretch);
+
+    .navigateButton {
+        @include btnPrimaryIcon;
+        margin: 0 12px;
+
+        & svg {
+            color: #202020 !important;
+        }
+    }
+
+    .calendarButton {
+        @include btnPrimary;
+    }
+}
+
+.calendarHeader__edit {
+    @include d-flex(flex-end);
+
+    .cancelButton, .editButton, .saveButton, .addButton  {
+        @include btnPrimary;
+        margin-left: 12px;
+    }
+
+    .addButton {
+        margin: 0 auto !important;
+    }
+
+    .cancelButton svg {
+        color: red !important;
+    }
+}
+
+
+
+
+
+

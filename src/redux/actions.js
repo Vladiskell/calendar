@@ -1,17 +1,17 @@
 import * as types from './constants';
 import { nanoid } from 'nanoid';
 
-export const setCurrentCalendarDataItem = (gridPosition) => ({
-    type: types.SET_CURRENT_CALENDAR_DATA_ITEM,
-    payload: { id: nanoid(), text: nanoid(), gridPosition }
+export const setCurrentGridItem = (rows, columns) => ({
+    type: types.SET_CURRENT_GRID_ITEM,
+    payload: { id: nanoid(), text: nanoid(), gridValues: { rows, columns } }
 });
 
-export const clearCurrentCalendarDataItem = () => ({
-    type: types.CLEAR_CURRENT_CALENDAR_DATA_ITEM,
+export const clearCurrentGridItem = () => ({
+    type: types.CLEAR_CURRENT_GRID_ITEM,
 })
 
-export const addCalendarDataItem = (data) => ({
-    type: types.ADD_CALENDAR_DATA_ITEM,
+export const addGridItem = (data) => ({
+    type: types.ADD_GRID_ITEM,
     payload: { data }
 });
 
