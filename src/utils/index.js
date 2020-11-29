@@ -39,3 +39,6 @@ export function getLastRowValue (event) {
 
     return lastRowValue;
 }
+
+// get mouse move distance
+

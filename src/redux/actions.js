@@ -20,3 +20,6 @@ export const openEditPageAction = (isEditPage) => ({
     payload: { isEditPage }
 });
 
+export const renderSelectedArea = () => ({
+    type: types.RENDER_SELECTED_AREA,
+})

@@ -7,6 +7,7 @@ import CalendarGrid from '../CalendarGrid/CalendarGrid';
 
 // ---------------------------------------------------------------------------------------------------------------------
 const CalendarTable = () => {
+
     return (
         <div className={styles.calendarTable} >
             <div className={styles.calendarTable__dates}>

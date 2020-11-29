@@ -2,27 +2,46 @@
 
 .calendarTable {
     display: grid;
+    position: relative;
 
     grid-template-columns: 100px 1fr;
     grid-template-rows: 70px 1fr;
 
     max-height: calc(100vh - 75px);
-    overflow: hidden;
+
+    overflow: auto;
 }
 
 .calendarTable__dates {
-    grid-column: 2 / -1;
+    display: flex;
+
+    position: sticky;
+    top: 0;
+    left: 0;
+    z-index: 99;
+
+    grid-column: 1 / -1;
     grid-row: 1 / 2;
+
+    background-color: #fff;
 }
 
 .calendarTable__times {
+    position: sticky;
+    top: 0;
+    left: 0;
+
     grid-column: 1 / 2;
     grid-row: 2 / -1;
 
+    background-color: #fff;
     border-right: $borderDark;
 }
 
 .calendarTable__grid {
     grid-column: 2 / -1;
     grid-row: 2 / -1;
+
+    // посмотреть горизонтальный скролл
+    //min-width: 1600px;
 }

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.scss';
 
-import { addGridItem, openEditPageAction } from '../../redux/actions';
-import { getCurrentGridItem } from '../../redux/selectors';
+import { addGridItem, openEditPageAction, renderSelectedArea } from '../../redux/actions';
+import { getCurrentGridItem, getIsEditPage } from '../../redux/selectors';
 
 import { Button, IconButton, Typography } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -17,20 +17,22 @@ import AddIcon from '@material-ui/icons/Add';
 const CalendarHeader = () => {
     const dispatch = useDispatch();
     const currentGriItem = useSelector(getCurrentGridItem);
+    const isEditPage = useSelector(getIsEditPage);
 
-    const [isEditPage, setIsEditPage] = useState(false);
+    // const [isEditPage, setIsEditPage] = useState(false);
 
     const onEdit = () => {
-        setIsEditPage(true);
         dispatch(openEditPageAction(true));
     };
 
     const onSave = () => {
         currentGriItem && dispatch(addGridItem(currentGriItem));
         dispatch(openEditPageAction(false));
-
-        setIsEditPage(false);
     };
+
+    const onCancel = () => {
+        dispatch(openEditPageAction(false));
+    }
 
     return (
         <div className={styles.calendarHeader}>
@@ -68,7 +70,7 @@ const CalendarHeader = () => {
                         <Button
                             className={styles.cancelButton}
                             startIcon={<DoneIcon color="primary" />}
-                            onClick={onSave}
+                            onClick={onCancel}
                         >
                             Cancel
                         </Button>

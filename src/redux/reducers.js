@@ -5,7 +5,9 @@ import { combineReducers } from 'redux';
 const initialState = {
     data: [],
     currentGridItem: null,
-    isEditPage: false,
+    // isEditPage: false,
+    isEditPage: true,
+    isSelectedArea: false,
 };
 
 const calendarReducer = (state = initialState, action) => {
@@ -15,6 +17,7 @@ const calendarReducer = (state = initialState, action) => {
                 ...state,
                 currentGridItem: initialState.currentGridItem,
                 isEditPage: action.payload.isEditPage,
+                isSelectedArea: false,
             };
         case types.SET_CURRENT_GRID_ITEM:
             return {
@@ -33,6 +36,11 @@ const calendarReducer = (state = initialState, action) => {
                 currentGridItem: null,
             }
         }
+        case types.RENDER_SELECTED_AREA:
+            return {
+                ...state,
+                isSelectedArea: true,
+            };
         default:
             return state
     }

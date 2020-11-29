@@ -6,3 +6,4 @@ export const ADD_GRID_ITEM = 'ADD_GRID_ITEM';
 
 export const OPEN_EDIT_PAGE = 'OPEN_EDIT_PAGE';
 
+export const RENDER_SELECTED_AREA = 'RENDER_SELECTED_AREA';

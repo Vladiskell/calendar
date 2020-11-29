@@ -2,10 +2,7 @@
 
 .selectedGridArea {
     @include gridArea($blueDark);
-    opacity: 1;
+    pointer-events: none;
 
-    &.disabled {
-        opacity: 0;
-    }
 }
 
