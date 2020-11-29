@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import classnames from 'classnames';
 
 // ---------------------------------------------------------------------------------------------------------------------
-const WorkedGridBlock = ({ isEditPage, rows, columns, children }) => {
+const WorkedGridBlock = ({ isEditPage, gridArea, children }) => {
     const [focused, setFocused] = useState(false);
 
     return (
@@ -12,7 +12,7 @@ const WorkedGridBlock = ({ isEditPage, rows, columns, children }) => {
                 styles.workedGridBlock,
                 focused && styles.focused,
                 isEditPage && styles.disabled)}
-            style={{ gridRow: rows, gridColumn: columns }}
+            style={{ gridArea: gridArea }}
         >
             <input
                 readOnly

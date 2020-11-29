@@ -2,43 +2,37 @@
 const rowHeight = 40;
 
 // get top grid coordinate and mouse Y coordinate relative grid;
-export function getCoordinates (event) {
-    const grid = event.currentTarget;
+export function getCoordinateY (e) {
+    const gridCoordinateY = e.currentTarget.getBoundingClientRect().top;
+    const eCoordinateY = e.clientY;
 
-    const gridCoordinateY = grid.getBoundingClientRect().top;
-    const mouseEventCoordinateY = event.clientY;
+    const coordinateY = eCoordinateY - gridCoordinateY;
 
-    const coordinateY = mouseEventCoordinateY - gridCoordinateY;
-
-    return { gridCoordinateY, coordinateY };
+    return coordinateY;
 }
 
-// get first column value as column data index
-export function getFirstColumnValue (event) {
-    const columnStart = event.target.dataset.index;
+// get first column value
+function getColumn (e) {
+    const column = e.target.dataset.index;
 
-    return columnStart;
+    return column;
 }
 
-// get first row value
-export function getFirstRowValue (event) {
-    const coordinateY = getCoordinates(event).coordinateY;
-    const firstRowValue = Math.ceil(coordinateY / rowHeight);
+export function getRow (e) {
+    const coordinateY = getCoordinateY(e);
+    const row = Math.ceil(coordinateY / rowHeight);
 
-    return firstRowValue;
+    return row;
 }
 
-// get last row value
-export function getLastRowValue (event) {
-    const gridCoordinateY = getCoordinates(event).gridCoordinateY;
-    const mouseCoordinateY = event.clientY;
+// get grid item area values
+export function getInitGridAreaValues (e) {
+    const rowStart = getRow(e);
+    const rowEnd = getRow(e) + 1;
+    const columnStart = getColumn(e);
+    const columnEnd = Number(getColumn(e)) + 1;
 
-    const mouseMoveDistance = (mouseCoordinateY - gridCoordinateY) / rowHeight;
+    const gridValues = { rowStart, rowEnd, columnStart, columnEnd };
 
-    const lastRowValue = Math.ceil(mouseMoveDistance + 1);
-
-    return lastRowValue;
+    return gridValues;
 }
-
-// get mouse move distance
-

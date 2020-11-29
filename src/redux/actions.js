@@ -1,9 +1,9 @@
 import * as types from './constants';
 import { nanoid } from 'nanoid';
 
-export const setCurrentGridItem = (rows, columns) => ({
+export const setCurrentGridItem = (gridArea) => ({
     type: types.SET_CURRENT_GRID_ITEM,
-    payload: { id: nanoid(), text: nanoid(), gridValues: { rows, columns } }
+    payload: { id: nanoid(), text: nanoid(), gridArea }
 });
 
 export const clearCurrentGridItem = () => ({

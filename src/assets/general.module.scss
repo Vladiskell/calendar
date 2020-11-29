@@ -30,7 +30,6 @@ $gridRowHeight: 40px;
 $gridTemplateColumns: repeat($gridColumns, 1fr);
 $gridTemplateRows: repeat($gridRows, $gridRowHeight);
 
-
 // ---------------------------------------------------------------------------------------------------------------------
 // mixins
 @mixin d-flex ($justify: center, $align: center) {
@@ -53,6 +52,21 @@ $gridTemplateRows: repeat($gridRows, $gridRowHeight);
     content: '';
 
     @include absolute;
+}
+
+
+@mixin gridArea ($background: $blueDark) {
+    position: relative;
+
+    &:before {
+        @include pseudo-absolute;
+
+        background-image: linear-gradient(to bottom, $background $gridRowHeight - 1px, #fff 1px);
+        background-size: calc(100% - 1px) $gridRowHeight;
+        background-repeat: repeat-y;
+
+        z-index: -1;
+    }
 }
 
 @mixin btn ($px: 8px, $py: 16px, $svg: 16px) {
@@ -80,19 +94,3 @@ $gridTemplateRows: repeat($gridRows, $gridRowHeight);
 @mixin btnPrimaryIcon {
     @include btn(7px, 10px, 22px);
 }
-
-@mixin gridArea ($background: $blueDark) {
-    position: relative;
-
-    &:before {
-        @include pseudo-absolute;
-
-        background-image: linear-gradient(to bottom, $background $gridRowHeight - 1px, #fff 1px);
-        background-size: calc(100% - 1px) $gridRowHeight;
-        background-repeat: repeat-y;
-
-        z-index: -1;
-    }
-}
-
-

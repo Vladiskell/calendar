@@ -19,8 +19,6 @@ const CalendarHeader = () => {
     const currentGriItem = useSelector(getCurrentGridItem);
     const isEditPage = useSelector(getIsEditPage);
 
-    // const [isEditPage, setIsEditPage] = useState(false);
-
     const onEdit = () => {
         dispatch(openEditPageAction(true));
     };

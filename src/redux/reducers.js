@@ -5,8 +5,7 @@ import { combineReducers } from 'redux';
 const initialState = {
     data: [],
     currentGridItem: null,
-    // isEditPage: false,
-    isEditPage: true,
+    isEditPage: false,
     isSelectedArea: false,
 };
 
@@ -15,8 +14,8 @@ const calendarReducer = (state = initialState, action) => {
         case types.OPEN_EDIT_PAGE:
             return {
                 ...state,
-                currentGridItem: initialState.currentGridItem,
                 isEditPage: action.payload.isEditPage,
+                currentGridItem: null,
                 isSelectedArea: false,
             };
         case types.SET_CURRENT_GRID_ITEM:

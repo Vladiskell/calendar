@@ -9,6 +9,10 @@
     @include d-flex(flex-end, center);
     padding-right: 16px;
 
+    //&:nth-child(2n) span {
+    //    opacity: 0;
+    //}
+
     span {
         font-size: 12px;
         color: $textGray;

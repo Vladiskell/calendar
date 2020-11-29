@@ -1,15 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import styles from './styles.module.scss';
+import classnames from 'classnames';
+import __mocks__ from '../../__mocks__';
 
-import { getCurrentGridItem, getGridData, getIsEditPage, getIsSelectedArea } from '../../redux/selectors';
+import { getGridData, getIsEditPage, getIsSelectedArea } from '../../redux/selectors';
+import { getCoordinateY, getInitGridAreaValues, getRow } from '../../utils';
+import { renderSelectedArea, setCurrentGridItem } from '../../redux/actions';
 
 import WorkedGridBlock from '../WorkedGridBlock/WorkedGridBlock';
 import SelectedGridSArea from '../SelectedGridArea/SelectedGridSArea';
-import { getCoordinates, getFirstColumnValue, getFirstRowValue, getLastRowValue } from '../../utils';
-import { clearCurrentGridItem, renderSelectedArea, setCurrentGridItem } from '../../redux/actions';
-import classnames from 'classnames';
-import __mocks__ from '../../__mocks__';
+
 
 // ---------------------------------------------------------------------------------------------------------------------
 const CalendarGrid = () => {
@@ -19,58 +20,61 @@ const CalendarGrid = () => {
     const isSelectedArea = useSelector(getIsSelectedArea);
     const gridBlocks = useSelector(getGridData);
 
-    const [firstMouseCoordinateY, setFirstMouseCoordinateY] = useState();
-    const [lastMouseCoordinateY, setLastMouseCoordinateY] = useState();
-    const [selectedAreaHeight, setSelectedAreaHeight] = useState(0);
-
-    const gridRef = useRef();
-
-    const [firstRow, setFirstRow] = useState('');
-    const [rows, setRows] = useState('');
-    const [columns, setColumns] = useState('');
-
     const [isChangeSelectArea, setIsChangeSelectArea] = useState(false);
 
+    // ---------------------------------------------------------------------------------------------
+    const [rowStart, setRowStart] = useState(0);
+    const [rowEnd, setRowEnd] = useState(0);
+    const [columnStart, setColumnStart] = useState(0);
+    const [columnEnd, setColumnEnd] = useState(0);
+
+    const gridArea = `${rowStart} / ${columnStart} / ${rowEnd} / ${columnEnd}`;
+
+    const [firstCoordinateY, setFirstCoordinateY] = useState(0);
+
+    // ---------------------------------------------------------------------------------------------
+    // init selected area
     const createSelectedArea = (e) => {
-        const { coordinateY } = getCoordinates(e);
-        setFirstMouseCoordinateY(coordinateY);
-
         dispatch(renderSelectedArea());
-
-        const rowStart = getFirstRowValue(e);
-        const columnStart = getFirstColumnValue(e);
-
-        const rows = `${rowStart} / ${+rowStart + 1}`;
-        const columns = `${columnStart} / ${+columnStart + 1}`;
-
         setIsChangeSelectArea(true);
-        setFirstRow(rowStart);
 
-        setRows(rows);
-        setColumns(columns);
+        const coordinateY = getCoordinateY(e);
+        setFirstCoordinateY(coordinateY);
+
+        const { rowStart, rowEnd, columnStart, columnEnd } = getInitGridAreaValues(e);
+
+        setRowStart(rowStart);
+        setRowEnd(rowEnd);
+        setColumnStart(columnStart);
+        setColumnEnd(columnEnd);
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // change selected area
     const changeSelectedArea = (e) => {
-        const lastRow = getLastRowValue(e);
-        const rows = `${firstRow} / ${lastRow}`;
+        const mouseEventCoordinateY = getCoordinateY(e);
 
-        const { coordinateY } = getCoordinates(e);
-        setLastMouseCoordinateY(coordinateY);
+        if (mouseEventCoordinateY > firstCoordinateY) {
+            const lastRow = getRow(e) + 1;
 
-        console.log('-----', lastMouseCoordinateY - firstMouseCoordinateY);
+            setRowEnd(lastRow);
+        } else if (mouseEventCoordinateY < firstCoordinateY) {
+            const firstRow = getRow(e);
 
-        setRows(rows);
+            setRowStart(firstRow);
+        }
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // complete selected area
     const completeCreatedSelectedScope = () => {
-        dispatch(setCurrentGridItem(rows, columns));
+        dispatch(setCurrentGridItem(gridArea));
 
         setIsChangeSelectArea(false);
     }
 
     return (
         <div
-            ref={gridRef}
             className={classnames(styles.calendarGrid, isChangeSelectArea && styles.select)}
             onMouseDown={(e) => isEditPage && createSelectedArea(e)}
             onMouseMove={(e) => isChangeSelectArea && changeSelectedArea(e)}
@@ -85,25 +89,16 @@ const CalendarGrid = () => {
                 />
             )) }
 
-            <WorkedGridBlock rows="1 / 10" columns="1 / 2" isEditPage={isEditPage} />
-            <WorkedGridBlock rows="1 / 10" columns="2 / 3" isEditPage={isEditPage} />
-
-
             { gridBlocks.map((item) => (
                 <WorkedGridBlock
                     isEditPage={isEditPage}
-                    rows={item.gridValues.rows}
-                    columns={item.gridValues.columns}
-                    key={item.gridValues.rows}
+                    gridArea={item.gridArea}
+                    key={item.id}
                 />
             ))}
 
             { isSelectedArea && (
-                <SelectedGridSArea
-                    rows={rows}
-                    columns={columns}
-                    // height={lastMouseCoordinateY - firstMouseCoordinateY}
-                />
+                <SelectedGridSArea gridArea={gridArea} />
             ) }
         </div>
     );
